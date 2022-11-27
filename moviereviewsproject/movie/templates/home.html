@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+    <div class="container">
+        <form action="">
+            <div class="mb-3">
+                <label class="form-label">Search for Movie</label>
+                <input type="text" class="form-control" name="searchMovie">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        <p> Searching for: {{ searchTerm }}</p>
+        <br />
+        <br />
+        <div class="row row-cols-1 row-cols-md-2">
+            {% for movie in movies %}
+            <div class="col mb-4">
+                <div class="card shadow bg-white rounded h-100" style="width: 16rem;">
+                    <img class="card-img-top" src="{{ movie.image.url }}" alt="{{ movie.image.url }}">
+                    <div class="card-body">
+                        <a href="{% url 'detail' movie.id %}" class="text-center">
+                            <h5 class="card-title fw-bold">{{ movie.title }}</h5>
+                        </a>
+                        <p class="card-text">{{ movie.description }}</p>
+                        {% if movie.url %}
+                        <a href="{{ movie.url }}">Movie link</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endblock content %}
+</body>
+
+</html>
